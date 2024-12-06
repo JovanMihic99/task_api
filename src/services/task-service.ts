@@ -3,25 +3,41 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 class TaskService {
-  static async findAllTasks(page: number = 1, limit = 10, userId?:number) {
+  static async findAllTasks(
+    page: number = 1,
+    limit = 10,
+    order: string = "desc",
+    userId?: number,    
+  ) {
     try {
+      if (order !== "desc" && order !== "asc") {
+        throw new Error("Sorting order must be qeual to 'asc' or 'desc'");
+      }
       const skip = (page - 1) * limit; // calculate number of tasks to skip based on page number
       let tasks;
-      if(userId){
-        tasks = await prisma.task.findMany({ // for basic users return their own tasks
+      if (userId) {
+        tasks = await prisma.task.findMany({
+          // for basic users return their own tasks
           skip: skip,
           take: limit,
-          where:{
-            userId
-          }
+          where: {
+            userId,
+          },
+          orderBy: {
+            id: order,
+          },
         });
-      } else{
-        tasks = await prisma.task.findMany({ // for admins return all tasks
+      } else {
+        tasks = await prisma.task.findMany({
+          // for admins return all tasks
           skip: skip,
           take: limit,
+          orderBy: {
+            id: order,
+          },
         });
       }
-       
+
       const totalTasks = await prisma.task.count();
       return {
         tasks,

@@ -4,16 +4,31 @@ import { Request, Response } from "express";
 const getTasks = async (req: Request, res: Response) => {
   try {
     const { role, id: userId } = req.user;
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10, sorting = "new" } = req.query;
     const parsedPage = parseInt(page as string);
     const parsedLimit = parseInt(limit as string);
-  
+    let parsedOrder;
     let result;
+    if (sorting === "new") {
+      parsedOrder = "desc";
+    } else if (sorting === "old") {
+      parsedOrder = "asc";
+    }
+
     if (role === "admin") {
-      result = await TaskService.findAllTasks(parsedPage,parsedLimit); // get all tasks for admins
+      result = await TaskService.findAllTasks(
+        parsedPage,
+        parsedLimit,
+        parsedOrder
+      ); // get all tasks for admins
     }
     if (role === "basic") {
-      result = await TaskService.findAllTasks(parsedPage,parsedLimit,parseInt(userId)); // get tasks belonging to user for "basic" users
+      result = await TaskService.findAllTasks(
+        parsedPage,
+        parsedLimit,
+        parsedOrder,
+        parseInt(userId)
+      ); // get tasks belonging to user for "basic" users
     }
     res.status(200).json(result);
     return;
