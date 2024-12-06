@@ -9,7 +9,7 @@ const router = Router();
 // admin routes
 // GET /api/tasks
 router.get("/", auth.authenticateJWT,auth.authorizeAdmin, asyncHandler(taskController.getAllTasks));
-
+router.get("/:userId", auth.authenticateJWT,auth.authorizeAdmin,asyncHandler(taskController.getTasksByUserId))
 // Unprotected routes
 // POST /api/users/signup
 
