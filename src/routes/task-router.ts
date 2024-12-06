@@ -26,6 +26,7 @@ router.post(
   "/:userId",
   auth.authenticateJWT,
   auth.authenticateUser,
+  auth.prohibitAdmin, // prohibit administrator from creating a task
   taskController.addTask
 );
 

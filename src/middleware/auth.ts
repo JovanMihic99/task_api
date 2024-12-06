@@ -58,8 +58,20 @@ const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const prohibitAdmin = (req: Request, res: Response, next: NextFunction) => {
+  const {role} = req.user;
+  if (role === "admin") {
+    res
+      .status(401)
+      .json({ error: "Administrators are not authorized to create new tasks" });
+    return;
+  }
+  next();
+};
+
 export default {
   authorizeAdmin,
   authenticateJWT,
   authenticateUser,
+  prohibitAdmin
 };
