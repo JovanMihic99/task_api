@@ -2,6 +2,7 @@ import { Router } from "express";
 import auth from "../middleware/auth";
 import asyncHandler from "express-async-handler";
 import taskController from "../controllers/task-controller";
+import taskValidator from "../middleware/validation/task-validator";
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.post(
 // DELETE /api/tasks/:id
 router.delete(
   "/:id",
+  taskValidator.requireTaskId,
   taskController.removeTask
 );
 
