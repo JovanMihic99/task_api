@@ -10,7 +10,12 @@ const requireSignupData = (req: Request, res: Response, next: NextFunction) => {
     });
     return;
   }
-
+  if (role!== 'admin' || role!=="basic"){
+    res.status(400).json({
+        error: `Role must either be 'admin' or 'basic'`,
+    });
+    return;
+  } 
   next();
 };
 
@@ -25,7 +30,7 @@ const validateEmail = async (
   );
   if (!valid) {
     res.status(400).json({
-      error: `Please enter a valid email (such as "example@email.com").`,
+      error: `Please enter a valid email (such as 'example@email.com').`,
     });
     return;
   }
