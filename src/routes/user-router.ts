@@ -9,7 +9,7 @@ const router = Router();
 // GET /api/users
 router.get("/", auth.authenticateJWT,auth.authorizeAdmin, asyncHandler(userController.getAllUsers));
 
-// basic routes
+// Unprotected routes
 // POST /api/users/signup
 router.post(
   "/signup",
