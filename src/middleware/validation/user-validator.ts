@@ -10,12 +10,22 @@ const requireSignupData = (req: Request, res: Response, next: NextFunction) => {
     });
     return;
   }
-  if (role!== 'admin' || role!=="basic"){
+  if (role !== "admin" || role !== "basic") {
     res.status(400).json({
-        error: `Role must either be 'admin' or 'basic'`,
+      error: `Role must either be 'admin' or 'basic'`,
     });
     return;
-  } 
+  }
+  next();
+};
+const requrieLoginData = (req: Request, res: Response, next: NextFunction) => {
+  const { email, password } = req.body;
+  if (!password || !email) {
+    res.status(400).json({
+      error: "email and password are required.",
+    });
+    return;
+  }
   next();
 };
 
@@ -66,6 +76,7 @@ const validatePassword = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   requireSignupData,
+  requrieLoginData,
   validatePassword,
   checkIsEmailTaken,
   validateEmail,

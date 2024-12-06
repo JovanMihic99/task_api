@@ -9,14 +9,20 @@ const router = Router();
 router.get("/", asyncHandler(userController.getAllUsers));
 
 // POST /api/users/signup
-router.post("/signup", 
-    validation.requireSignupData,
-    validation.validateEmail,
-    validation.checkIsEmailTaken,
-    validation.validatePassword,
-    asyncHandler(userController.signup));
+router.post(
+  "/signup",
+  validation.requireSignupData,
+  validation.validateEmail,
+  validation.checkIsEmailTaken,
+  validation.validatePassword,
+  asyncHandler(userController.signup)
+);
 
 // POST /api/users/login
-router.post("/login", userController.login)
+router.post(
+  "/login",
+  validation.requrieLoginData,
+  asyncHandler(userController.login)
+);
 
 export default router;
