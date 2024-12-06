@@ -6,7 +6,6 @@ import util from "../util/util";
 const signup = async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, username, password, email, role } = req.body;
-    console.log(firstName);
     const hashedPassword = bcrypt.hashSync(password, 10);
     const user = await UserService.createUser(
       firstName,
