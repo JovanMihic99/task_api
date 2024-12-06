@@ -44,12 +44,12 @@ const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
 const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
   const { id, role } = req.user;
   const userId = parseInt(req.params.userId);
-  if (role === "admin") {
+  if (role === "admin") { // by default allow admins everywhere where "basic" users are allowed 
     next();
     return;
   }
-  if (userId !== id) {
-    console.log({ userId, id, role });
+  if (userId !== id) { // "basic" users are only allowed to modify their own data
+    console.log(req.user);
     res
       .status(401)
       .json({ error: "You are not authorized to use this resource" });

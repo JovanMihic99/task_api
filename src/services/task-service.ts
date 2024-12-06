@@ -12,12 +12,25 @@ class TaskService {
       throw new Error(error as string);
     }
   }
-  static async findTasksByUserId(userId:number) {
+  static async findTaskById(id: number) {
+    try {
+      const task = await prisma.task.findFirst({
+        where: {
+          id,
+        },
+      });
+      return task;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error as string);
+    }
+  }
+  static async findTasksByUserId(userId: number) {
     try {
       const tasks = await prisma.task.findMany({
-        where:{
-            userId
-        }
+        where: {
+          userId,
+        },
       });
       return tasks;
     } catch (error) {
@@ -25,15 +38,12 @@ class TaskService {
       throw new Error(error as string);
     }
   }
-  static async createTask(
-    body: string,
-    userId: number
-  ) {
+  static async createTask(body: string, userId: number) {
     try {
       const task = await prisma.task.create({
         data: {
           body,
-          userId
+          userId,
         },
       });
       return task;
@@ -42,7 +52,20 @@ class TaskService {
       throw new Error("Task creation failed");
     }
   }
-
+  static async deleteTask(id: number) {
+    try {
+      console.log({id});
+      const task = await prisma.task.delete({
+        where: {
+          id,
+        },
+      });
+      return task;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error as string);
+    }
+  }
 }
 
 export default TaskService;

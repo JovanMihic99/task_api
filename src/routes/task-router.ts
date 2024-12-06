@@ -10,26 +10,23 @@ const router = Router();
 router.get(
   "/",
   auth.authenticateJWT,
-  auth.authorizeAdmin,
-  asyncHandler(taskController.getAllTasks)
+  asyncHandler(taskController.getTasks)
 );
-router.get(
-  "/:userId",
-  auth.authenticateJWT,
-  auth.authenticateUser,
-  asyncHandler(taskController.getTasksByUserId)
-);
-// Unprotected routes
+
 
 // POST /api/tasks
 router.post(
-  "/:userId",
+  "/",
   auth.authenticateJWT,
-  auth.authenticateUser,
   auth.prohibitAdmin, // prohibit administrator from creating a task
   taskController.addTask
 );
 
-// POST /api/users/login
+// DELETE /api/tasks/:id
+router.delete(
+  "/:id",
+  auth.authenticateJWT,
+  taskController.removeTask
+);
 
 export default router;
