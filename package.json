@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon"
+    "start": "node ./dist/server.js",
+    "dev": "nodemon",
+    "build": "tsc"
   },
   "author": "Jovan Mihic",
   "license": "ISC",
