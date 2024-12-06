@@ -5,19 +5,19 @@ import taskController from "../controllers/task-controller";
 
 const router = Router();
 
-// admin routes
+// protect all task routes
+router.use(auth.authenticateJWT) 
+
+
 // GET /api/tasks
 router.get(
   "/",
-  auth.authenticateJWT,
   asyncHandler(taskController.getTasks)
 );
-
 
 // POST /api/tasks
 router.post(
   "/",
-  auth.authenticateJWT,
   auth.prohibitAdmin, // prohibit administrator from creating a task
   taskController.addTask
 );
@@ -25,7 +25,6 @@ router.post(
 // DELETE /api/tasks/:id
 router.delete(
   "/:id",
-  auth.authenticateJWT,
   taskController.removeTask
 );
 
