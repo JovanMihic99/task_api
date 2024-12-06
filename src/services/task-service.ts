@@ -11,7 +11,7 @@ class TaskService {
   ) {
     try {
       if (order !== "desc" && order !== "asc") {
-        throw new Error("Sorting order must be qeual to 'asc' or 'desc'");
+        throw new Error("Sorting order must be equal to 'asc' or 'desc'");
       }
       const skip = (page - 1) * limit; // calculate number of tasks to skip based on page number
       let tasks;
