@@ -16,4 +16,7 @@ router.post("/signup",
     validation.validatePassword,
     asyncHandler(userController.signup));
 
+// POST /api/users/login
+router.post("/login", userController.login)
+
 export default router;

@@ -25,6 +25,19 @@ class UserService {
       throw new Error("Finding user by id failed");
     }
   }
+  static async findUserByEmail(email: string) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          email,
+        },
+      });
+      return user;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Finding user by email failed");
+    }
+  }
   static async createUser(
     firstName: string,
     lastName: string,
