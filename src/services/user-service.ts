@@ -23,6 +23,23 @@ class UserService {
       throw new Error("Finding user by id failed");
     }
   }
+  static async createUser(firstName: string, lastName: string, username: string, password: string, email:string, role? :string) {
+    try {
+      const user = await prisma.user.create({
+        data: {
+          firstName,
+          lastName,
+          username,
+          email,
+          password,
+          role
+        },
+      });
+      return user;
+    } catch (error) {
+      throw new Error("User creation failed");
+    }
+  }
 }
 
 export default UserService;
