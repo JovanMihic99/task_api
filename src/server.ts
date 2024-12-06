@@ -14,7 +14,7 @@ app.use(express.json());
 const router = express.Router();
 app.use("/api",router);
 router.use("/users",userRouter);
-router.use("/task",taskRouter);
+router.use("/tasks",taskRouter);
 
 // Middleware
 app.use(errorHandler);

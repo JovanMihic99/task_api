@@ -1,5 +1,20 @@
 import {Router} from "express";
+import auth from '../middleware/auth';
+import asyncHandler from "express-async-handler";
+import taskController from '../controllers/task-controller';
 
 const router = Router();
+
+
+// admin routes
+// GET /api/tasks
+router.get("/", auth.authenticateJWT,auth.authorizeAdmin, asyncHandler(taskController.getAllTasks));
+
+// Unprotected routes
+// POST /api/users/signup
+
+
+// POST /api/users/login
+
 
 export default router;
