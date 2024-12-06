@@ -4,12 +4,16 @@ import { Request, Response } from "express";
 const getTasks = async (req: Request, res: Response) => {
   try {
     const { role, id: userId } = req.user;
+    const { page = 1, limit = 10 } = req.query;
+    const parsedPage = parseInt(page as string);
+    const parsedLimit = parseInt(limit as string);
+  
     let result;
     if (role === "admin") {
-      result = await TaskService.findAllTasks(); // get all tasks for admins
+      result = await TaskService.findAllTasks(parsedPage,parsedLimit); // get all tasks for admins
     }
     if (role === "basic") {
-      result = await TaskService.findTasksByUserId(parseInt(userId)); // get tasks belonging to user for "basic" users
+      result = await TaskService.findAllTasks(parsedPage,parsedLimit,parseInt(userId)); // get tasks belonging to user for "basic" users
     }
     res.status(200).json(result);
     return;
