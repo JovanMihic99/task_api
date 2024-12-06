@@ -63,7 +63,7 @@ const prohibitAdmin = (req: Request, res: Response, next: NextFunction) => {
   if (role === "admin") {
     res
       .status(401)
-      .json({ error: "Administrators are not authorized to create new tasks" });
+      .json({ error: "Administrators are not authorized to use this resource" });
     return;
   }
   next();
