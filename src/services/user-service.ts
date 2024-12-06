@@ -80,6 +80,23 @@ class UserService {
       throw new Error("Error checking email");
     }
   }
+
+  static async isUsernameTaken(username: string): Promise<boolean> {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          username,
+        },
+      });
+      if (user) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error checking username");
+    }
+  }
 }
 
 export default UserService;

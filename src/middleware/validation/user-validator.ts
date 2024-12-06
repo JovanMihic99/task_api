@@ -62,7 +62,20 @@ const checkIsEmailTaken = async (
   }
   next();
 };
-
+const checkIsUsernameTaken= async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { username } = req.body;
+  if (await UserService.isUsernameTaken(username)) {
+    res.status(400).json({
+      error: "Email is already taken, please choose a different one.",
+    });
+    return;
+  }
+  next();
+};
 const validatePassword = (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
   if (password.length < 5) {
@@ -81,4 +94,5 @@ export default {
   validatePassword,
   checkIsEmailTaken,
   validateEmail,
+  checkIsUsernameTaken
 };

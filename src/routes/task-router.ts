@@ -20,7 +20,14 @@ router.get(
   asyncHandler(taskController.getTasksByUserId)
 );
 // Unprotected routes
-// POST /api/users/signup
+
+// POST /api/tasks
+router.post(
+  "/:userId",
+  auth.authenticateJWT,
+  auth.authenticateUser,
+  taskController.addTask
+);
 
 // POST /api/users/login
 

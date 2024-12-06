@@ -25,6 +25,24 @@ class TaskService {
       throw new Error(error as string);
     }
   }
+  static async createTask(
+    body: string,
+    userId: number
+  ) {
+    try {
+      const task = await prisma.task.create({
+        data: {
+          body,
+          userId
+        },
+      });
+      return task;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Task creation failed");
+    }
+  }
+
 }
 
 export default TaskService;
