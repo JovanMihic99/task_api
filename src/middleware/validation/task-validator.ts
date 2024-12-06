@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 
-const requireTaskId = (req: Request, res: Response, next: NextFunction) => {
+const validateTaskId = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  if (!id) {
+  if (isNaN(parseInt(id))) {
     res.status(400).json({
-      error: "Task id request parameter is required.",
+      error: "Task id request parameter must be an Integer.",
     });
     return;
   }
@@ -12,5 +12,5 @@ const requireTaskId = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
-  requireTaskId,
+    validateTaskId,
 };

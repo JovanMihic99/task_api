@@ -26,7 +26,7 @@ router.post(
 // DELETE /api/tasks/:id
 router.delete(
   "/:id",
-  taskValidator.requireTaskId,
+  taskValidator.validateTaskId,
   taskController.removeTask
 );
 
