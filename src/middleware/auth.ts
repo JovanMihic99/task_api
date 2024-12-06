@@ -62,7 +62,7 @@ const prohibitAdmin = (req: Request, res: Response, next: NextFunction) => {
   const {role} = req.user;
   if (role === "admin") {
     res
-      .status(401)
+      .status(403)
       .json({ error: "Administrators are not authorized to use this resource" });
     return;
   }

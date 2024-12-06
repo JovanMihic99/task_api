@@ -22,3 +22,5 @@ app.use(errorHandler);
 app.listen(port, () => {
     console.log(`Task API listening on port ${port}...`);
 });
+
+export default app;
