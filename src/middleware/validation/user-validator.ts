@@ -10,9 +10,10 @@ const requireSignupData = (req: Request, res: Response, next: NextFunction) => {
     });
     return;
   }
-  if (role !== "admin" || role !== "basic") {
+  if (role !== "admin" && role !== "basic" && role !==undefined) {
+    console.log(role);
     res.status(400).json({
-      error: `Role must either be 'admin' or 'basic'`,
+      error: `Role must either be 'admin' basic 'basic' or undefined (defaults to basic)`,
     });
     return;
   }

@@ -2,12 +2,14 @@ import { Router } from "express";
 import userController from "../controllers/user-controller";
 import asyncHandler from "express-async-handler";
 import validation from "../middleware/validation/user-validator";
-
+import auth from "../middleware/auth";
 const router = Router();
 
+// admin routes
 // GET /api/users
-router.get("/", asyncHandler(userController.getAllUsers));
+router.get("/", auth.authenticateJWT,auth.authorizeAdmin, asyncHandler(userController.getAllUsers));
 
+// basic routes
 // POST /api/users/signup
 router.post(
   "/signup",

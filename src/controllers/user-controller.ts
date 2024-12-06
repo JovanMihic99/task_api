@@ -35,14 +35,14 @@ const login = async (req: Request, res: Response) => {
       res.status(401).json({ error: "Invalid email or password" });
       return;
     }
-    const payload = util.removePropertyFromObject(user, password);
+    const userData = util.removePropertyFromObject(user, password);
 
     if (!process.env.ACCESS_TOKEN_SECRET) {
     throw new Error(
       "Server error: Missing ACCESS_TOKEN_SECRET environment variable."
     );
   }
-  const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET as string, {
+  const token = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET as string, {
     expiresIn: "1h",
   });
     res.status(200).json({message:`Login of user ${email} successfull`, token});
