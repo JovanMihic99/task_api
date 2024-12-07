@@ -64,15 +64,20 @@ const editTask = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { id: userId, role } = req.user;
     const task = await TaskService.findTaskById(parseInt(id));
+
     if (role === "basic" && parseInt(userId) !== task?.userId) {
       res
         .status(403)
         .json({ message: "You are not authorized to delete this task." });
-      return
+      return;
     }
-    const result = await TaskService.updateTask(parseInt(id),body);
-    res.status(200)
-    .json({message:`Successfully updated task ${id}`, updatedTask:result})
+    const result = await TaskService.updateTask(parseInt(id), body);
+    res
+      .status(200)
+      .json({
+        message: `Successfully updated task ${id}`,
+        updatedTask: result,
+      });
   } catch (error) {
     console.error("Error updating task in database: ", error);
     res
@@ -114,5 +119,5 @@ export default {
   getTasks,
   addTask,
   removeTask,
-  editTask
+  editTask,
 };
