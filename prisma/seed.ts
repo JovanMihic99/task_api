@@ -42,7 +42,7 @@ async function main() {
       username: 'adminUser',
       password:
         "$2b$10$9vcqIH0RP07KTvUS2qfebuoHSsjHR3WzzI4KWNNrUyPtaC6eogquW", // all seeded users have password="password" for easier testing
-      role: "basic",
+      role: "admin",
     }
   });
   console.log(`Created administrator with id:${admin.id} with default password="password"`);
