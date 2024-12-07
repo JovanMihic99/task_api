@@ -11,6 +11,7 @@ jest.mock("@prisma/client", () => {
       count: jest.fn(),
       create: jest.fn(),
       delete: jest.fn(),
+      update: jest.fn(),
     },
   };
   return { PrismaClient: jest.fn(() => mockPrisma) };
@@ -125,6 +126,29 @@ describe("TaskService", () => {
 
       await expect(TaskService.deleteTask(999)).rejects.toThrow(
         "Task deletion failed"
+      );
+    });
+  });
+
+  describe("updateTask", () => {
+    it("should update a task's body", async () => {
+      const mockTask = { id: 1, body: "Updated Task", userId: 1 };
+      prisma.task.update.mockResolvedValue(mockTask);
+
+      const result = await TaskService.updateTask(1, "Updated Task");
+
+      expect(result).toEqual(mockTask);
+      expect(prisma.task.update).toHaveBeenCalledWith({
+        where: { id: 1 },
+        data: { body: "Updated Task" },
+      });
+    });
+
+    it("should throw an error if task update fails", async () => {
+      prisma.task.update.mockRejectedValue(new Error("Task update failed"));
+
+      await expect(TaskService.updateTask(999, "Updated Task")).rejects.toThrow(
+        "Task update failed"
       );
     });
   });

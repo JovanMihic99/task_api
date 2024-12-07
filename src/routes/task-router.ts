@@ -10,7 +10,11 @@ const router = Router();
 router.use(auth.authenticateJWT);
 
 // GET /api/tasks
-router.get("/", asyncHandler(taskController.getTasks));
+router.get(
+  "/",
+  taskValidator.validateSort,
+  asyncHandler(taskController.getTasks)
+);
 
 // POST /api/tasks
 router.post(

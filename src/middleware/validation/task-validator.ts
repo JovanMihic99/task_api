@@ -16,6 +16,18 @@ const validateTaskId = (req: Request, res: Response, next: NextFunction) => {
   }
   next();
 };
+
+const validateSort = (req: Request, res: Response, next: NextFunction) => {
+  const { sort } = req.query;
+  if (sort!=="new" && sort!=="old") {
+    res.status(400).json({
+      error: `sort must be a string "new" or "old"`,
+    });
+    return;
+  }
+  next();
+};
+
 const validateTaskBody = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req.body;
   if(!body){
@@ -35,5 +47,6 @@ const validateTaskBody = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
     validateTaskId,
-    validateTaskBody
+    validateTaskBody,
+    validateSort
 };
