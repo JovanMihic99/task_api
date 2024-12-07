@@ -23,6 +23,9 @@ router.post(
   taskController.addTask
 );
 
+// PUT /api/tasks/:id
+router.put("/:id",taskController.editTask)
+
 // DELETE /api/tasks/:id
 router.delete(
   "/:id",

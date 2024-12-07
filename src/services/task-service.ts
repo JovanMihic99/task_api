@@ -90,9 +90,25 @@ class TaskService {
       throw new Error("Task creation failed");
     }
   }
+  static async updateTask(id:number, body: string){
+    try {
+      const task = await prisma.task.update({
+        where: {
+          id
+        },
+        data: {
+          body
+        },
+      })
+      return task;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error as string);
+    }
+  }
   static async deleteTask(id: number) {
     try {
-      console.log({ id });
+
       const task = await prisma.task.delete({
         where: {
           id,
