@@ -12,7 +12,7 @@ router.use(auth.authenticateJWT);
 // GET /api/tasks
 router.get(
   "/",
-  taskValidator.validateSort,
+  taskValidator.validateGetTasksQueryParams,
   asyncHandler(taskController.getTasks)
 );
 

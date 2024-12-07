@@ -49,7 +49,6 @@ const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
     return;
   }
   if (userId !== id) { // "basic" users are only allowed to modify their own data
-    console.log(req.user);
     res
       .status(401)
       .json({ error: "You are not authorized to use this resource" });

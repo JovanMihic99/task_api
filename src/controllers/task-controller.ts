@@ -44,7 +44,6 @@ const getTasks = async (req: Request, res: Response) => {
 const addTask = async (req: Request, res: Response) => {
   try {
     const { id: userId } = req.user; // change this later to not use req.params!
-    console.log(userId);
     const { body: taskBody } = req.body;
     const result = await TaskService.createTask(taskBody, parseInt(userId));
     res.status(200).json(result);

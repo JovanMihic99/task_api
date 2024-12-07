@@ -11,8 +11,10 @@ class TaskService {
   ) {
     try {
       if (order !== "desc" && order !== "asc") {
-        throw new Error("Sorting order must be equal to 'asc' or 'desc'");        
+        throw new Error("Sorting order must be equal to 'asc' or 'desc'");
       }
+      page = Math.floor(page); // in case user entered floats instead of integers
+      limit = Math.floor(limit);
       let skip = (page - 1) * limit; // calculate number of tasks to skip based on page number
       let tasks;
       let totalTasks;
@@ -22,8 +24,10 @@ class TaskService {
             userId,
           },
         });
-        if (page>Math.ceil(totalTasks / limit)){ // return the last page if user entered a page number bigger than totalPages
+        if (page > Math.ceil(totalTasks / limit)) {
+          // return the last page if user entered a page number bigger than totalPages
           page = Math.ceil(totalTasks / limit);
+          if (page === 0) page = 1;
           skip = (page - 1) * limit;
         }
         tasks = await prisma.task.findMany({
@@ -37,11 +41,12 @@ class TaskService {
             id: order,
           },
         });
-        
       } else {
         totalTasks = await prisma.task.count();
-        if (page>Math.ceil(totalTasks / limit)){ // return the last page if user entered a page number bigger than totalPages
+        if (page > Math.ceil(totalTasks / limit)) {
+          // return the last page if user entered a page number bigger than totalPages
           page = Math.ceil(totalTasks / limit);
+          if (page === 0) page = 1;
           skip = (page - 1) * limit;
         }
         tasks = await prisma.task.findMany({
@@ -52,7 +57,6 @@ class TaskService {
             id: order,
           },
         });
-        
       }
 
       return {
@@ -62,7 +66,7 @@ class TaskService {
         totalPages: Math.ceil(totalTasks / limit), // calculate total pages
       };
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error as string);
     }
   }
@@ -75,23 +79,10 @@ class TaskService {
       });
       return task;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error as string);
     }
   }
-  // static async findTasksByUserId(userId: number) {
-  //   try {
-  //     const tasks = await prisma.task.findMany({
-  //       where: {
-  //         userId,
-  //       },
-  //     });
-  //     return tasks;
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw new Error(error as string);
-  //   }
-  // }
   static async createTask(body: string, userId: number) {
     try {
       const task = await prisma.task.create({
@@ -102,7 +93,7 @@ class TaskService {
       });
       return task;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error("Task creation failed");
     }
   }
@@ -118,7 +109,7 @@ class TaskService {
       });
       return task;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error as string);
     }
   }
@@ -131,7 +122,7 @@ class TaskService {
       });
       return task;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error as string);
     }
   }

@@ -8,7 +8,7 @@ class UserService {
       const users = await prisma.user.findMany();
       return users;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error as string);
     }
   }
@@ -21,7 +21,7 @@ class UserService {
       });
       return user;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error("Finding user by id failed");
     }
   }
@@ -34,7 +34,7 @@ class UserService {
       });
       return user;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error("Finding user by email failed");
     }
   }
@@ -59,7 +59,7 @@ class UserService {
       });
       return user;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error("User creation failed");
     }
   }
@@ -76,7 +76,7 @@ class UserService {
       }
       return false;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error("Error checking email");
     }
   }
@@ -93,7 +93,7 @@ class UserService {
       }
       return false;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error("Error checking username");
     }
   }

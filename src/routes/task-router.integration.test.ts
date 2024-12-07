@@ -52,7 +52,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  // Clean up the database after tests
   await prisma.task.deleteMany();
   await prisma.user.deleteMany();
 });
