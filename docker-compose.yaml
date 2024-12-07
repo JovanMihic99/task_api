@@ -1,7 +1,7 @@
 services:
   task-api:
     build: .
-    container_name: task-api-container
+    container_name: task_api_container
     ports:
       - 3000:3000
     volumes:
@@ -17,10 +17,10 @@ services:
       ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
     depends_on:
-      - postgresql-db
-  postgresql-db:
+      - postgresql_db
+  postgresql_db:
     image: postgres:16.4
-    container_name: db-container
+    container_name: db_container
     environment:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_DB: ${DATABASE_NAME}
