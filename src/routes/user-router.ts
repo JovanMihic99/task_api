@@ -16,6 +16,7 @@ router.post(
   validation.requireSignupData,
   validation.validateEmail,
   validation.checkIsEmailTaken,
+  validation.checkIsUsernameTaken,
   validation.validatePassword,
   asyncHandler(userController.signup)
 );
