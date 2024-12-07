@@ -103,8 +103,10 @@ paths:
               type: object
               properties:
                 email:
+                  example: user@email.com
                   type: string
                 password:
+                  example: password
                   type: string
               required:
                 - email
@@ -149,11 +151,13 @@ paths:
           required: false
           schema:
             type: integer
+            example: 1
         - name: limit
           in: query
           description: Select how many tasks per page
           required: false
           schema:
+            example: 10
             type: integer
       responses:
         '200':
