@@ -28,12 +28,21 @@ paths:
                     id:
                       type: integer
                       example: 1
-                    username:
-                      type: string
-                      example: user1
                     email:
                       type: string
                       example: user1@example.com
+                    firstName:
+                      type: string
+                      example: "User"
+                    lastName:
+                      type: string
+                      example: "Userson"
+                    username:
+                      type: string
+                      example: user1
+                    password:
+                      type: string
+                      example: $2b$10$9vcqIH0RP07KTvUS2qfebuoHSsjHR3WzzI4KWNNrUyPtaC6eogquW
         '401':
           description: Unauthorized
         '403':
@@ -51,13 +60,22 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                username:
-                  type: string
+              properties:             
                 email:
                   type: string
+                  example: user1@example.com
+                firstName:
+                  type: string
+                  example: "User"
+                lastName:
+                  type: string
+                  example: "Userson"
+                username:
+                  type: string
+                  example: user1
                 password:
                   type: string
+                  example: password
               required:
                 - username
                 - email
@@ -84,12 +102,12 @@ paths:
             schema:
               type: object
               properties:
-                username:
+                email:
                   type: string
                 password:
                   type: string
               required:
-                - username
+                - email
                 - password
       responses:
         '200':
@@ -99,6 +117,8 @@ paths:
               schema:
                 type: object
                 properties:
+                  message:
+                    type: string
                   token:
                     type: string
         '400':
@@ -109,28 +129,32 @@ paths:
   /api/tasks:
     get:
       summary: Get tasks
-      description: Retrieve a list of tasks. Requires proper query parameters.
+      description: Retrieve a list of tasks belonging to a user, or a list of all tasks if the user has admin privileges
       operationId: getTasks
       security:
         - jwt: []
       tags:
         - Tasks
       parameters:
-        - name: status
+        - name: sorting
           in: query
-          description: Filter tasks by status
+          description: Sorting order ("new" or "old")
           required: false
           schema:
             type: string
-            enum:
-              - pending
-              - completed
-        - name: assignedTo
+            example: new
+        - name: page
           in: query
-          description: Filter tasks by the user assigned
+          description: Select which page
           required: false
           schema:
-            type: string
+            type: integer
+        - name: limit
+          in: query
+          description: Select how many tasks per page
+          required: false
+          schema:
+            type: integer
       responses:
         '200':
           description: Successfully retrieved tasks
@@ -142,18 +166,14 @@ paths:
                   type: object
                   properties:
                     id:
+                      example: 1
                       type: integer
-                    title:
+                    body:
+                      example: "Task text body"
                       type: string
-                    description:
-                      type: string
-                    status:
-                      type: string
-                    assignedTo:
-                      type: string
-                    dueDate:
-                      type: string
-                      format: date
+                    userId:
+                      example: 5
+                      type: integer
         '400':
           description: Bad request (invalid query parameters)
         '401':
@@ -174,16 +194,12 @@ paths:
             schema:
               type: object
               properties:
-                title:
+                body:
+                  example: Task text body
                   type: string
-                description:
-                  type: string
-                dueDate:
-                  type: string
-                  format: date
+               
               required:
-                - title
-                - description
+                - body
       responses:
         '201':
           description: Task successfully created
@@ -216,15 +232,11 @@ paths:
             schema:
               type: object
               properties:
-                title:
-                  type: string
-                description:
-                  type: string
-                status:
+                body:
+                  example: Task text body
                   type: string
               required:
-                - title
-                - description
+                - body
       responses:
         '200':
           description: Task successfully updated
