@@ -7,14 +7,10 @@ import taskValidator from "../middleware/validation/task-validator";
 const router = Router();
 
 // protect all task routes
-router.use(auth.authenticateJWT) 
-
+router.use(auth.authenticateJWT);
 
 // GET /api/tasks
-router.get(
-  "/",
-  asyncHandler(taskController.getTasks)
-);
+router.get("/", asyncHandler(taskController.getTasks));
 
 // POST /api/tasks
 router.post(
@@ -24,13 +20,9 @@ router.post(
 );
 
 // PUT /api/tasks/:id
-router.put("/:id",taskController.editTask)
+router.put("/:id", taskValidator.validateTaskBody, taskController.editTask);
 
 // DELETE /api/tasks/:id
-router.delete(
-  "/:id",
-  taskValidator.validateTaskId,
-  taskController.removeTask
-);
+router.delete("/:id", taskValidator.validateTaskId, taskController.removeTask);
 
 export default router;
