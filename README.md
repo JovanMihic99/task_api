@@ -17,6 +17,7 @@ A dockerized REST API for managing tasks.
 - Delete tasks
 - User authentication with JWT
 - Admin authorization for managing users
+- Integration and Unit tests
 
 ## Technologies Used
 
@@ -29,6 +30,8 @@ A dockerized REST API for managing tasks.
 - **[JSONWebToken](https://jwt.io/)**: A compact, URL-safe means of representing claims to be transferred between two parties, used for user authentication.
 - **[Swagger UI](https://swagger.io/tools/swagger-ui/)**: A tool for documenting and testing API endpoints in a user-friendly interface.
 - **[TypeScript](https://www.typescriptlang.org/)**: A superset of JavaScript that adds static types, used to improve code quality and development experience.
+- **[Jest](https://jestjs.io/)**: A testing framework for JavaScript, used for writing unit and integration tests.
+
 
 
 ## Installation
