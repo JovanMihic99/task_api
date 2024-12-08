@@ -4,8 +4,7 @@
 echo "Running migrations..."
 npm run migrate
 
-# echo "Generating prisma client..."
-# npx prisma generate
+npm run build
 
 # Seed the database (only run after migrations are applied)
 echo "Seeding the database..."

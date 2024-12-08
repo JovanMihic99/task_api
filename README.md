@@ -48,8 +48,11 @@ git clone https://github.com/JovanMihic99/task_api.git
 ```bash
 cd task_api
 ```
-
-### 3. Environment variables:
+### 3. Add execution permissions to entripoint.sh
+```bash
+chmod +x entrypoint.sh
+```
+### 4. Environment variables:
 
 Ensure that you have a `.env` file in the project root directory. The `.env` file should contain the following configurations:
 
@@ -67,13 +70,13 @@ ACCESS_TOKEN_SECRET=YourSecret
 
 You can customize the values (such as `DATABASE_USER`, `DATABASE_PASSWORD`, etc.) if you want a different setup.
 
-### 4. Build the Docker image:
+### 5. Build the Docker image:
 
 ```bash
 docker build -t task_api .
 ```
 
-### 5. Run the Docker containers:
+### 6. Run the Docker containers:
 #### Production Environment
 To start the API in `production` environment run:
 ```bash
