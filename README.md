@@ -80,7 +80,16 @@ docker build -t task_api .
 docker compose up --build
 ```
 
-This will start the PostgreSQL database, apply migrations, seed the database and start the Task API server.
+Or if you wish to run in `dev` environtment
+```bash
+MODE=dev docker compose up --build
+```
+
+## Jest Tests
+To start Unit and Integration tests run this command instead of 
+```bash
+MODE=test docker-compose run --rm task-api
+```
 
 ## Usage
 
