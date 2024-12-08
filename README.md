@@ -74,30 +74,31 @@ You can customize the values (such as `DATABASE_USER`, `DATABASE_PASSWORD`, etc.
 docker build -t task_api .
 ```
 
-### 5. Run the Docker image:
-
+### 5. Run the Docker containers:
+#### Production Environment
+To start in `production` environment run:
 ```bash
-docker compose up --build
+docker compose up 
+```
+#### Development environment
+To start in `dev` environtment run:
+```bash
+MODE=dev docker compose up 
 ```
 
-Or if you wish to run in `dev` environtment
-```bash
-MODE=dev docker compose up --build
-```
-
-## Jest Tests
-To start Unit and Integration tests run this command instead of 
+#### Test environment
+To start Unit and Integration tests run this command: 
 ```bash
 MODE=test docker-compose run --rm task-api
 ```
 
 ## Usage
 
-The API will be running on `http://localhost:3000` (or the port you’ve configured).
+The API will be running on `http://localhost:3000`
 
 ### API Documentation
 
-The Swagger-based API documentation can be accessed at `http://localhost:3000/api-docs/`.
+The Swagger-based API documentation can be found at `http://localhost:3000/api-docs/` (app must be running in `production` or `dev` environment).
 
 ### Available Routes
 
