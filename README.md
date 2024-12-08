@@ -48,7 +48,7 @@ git clone https://github.com/JovanMihic99/task_api.git
 ```bash
 cd task_api
 ```
-### 3. Add execution permissions to entripoint.sh
+### 3. Add execution permissions to entrypoint.sh
 ```bash
 chmod +x entrypoint.sh
 ```
