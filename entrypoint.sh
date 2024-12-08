@@ -4,6 +4,9 @@
 echo "Running migrations..."
 npm run migrate
 
+# echo "Generating prisma client..."
+# npx prisma generate
+
 # Seed the database (only run after migrations are applied)
 echo "Seeding the database..."
 npx ts-node prisma/seed.ts
