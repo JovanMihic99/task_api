@@ -19,8 +19,6 @@ services:
     depends_on:
       postgresql_db:
         condition: service_healthy # Ensure task-api waits for db to be healthy
-    command: /bin/sh -c "if [ \"$MODE\" = 'dev' ]; then npm run dev; elif [ \"$MODE\" = 'test' ]; then npm run test; else npm run start; fi"
-  
   postgresql_db:
     image: postgres:16.4
     container_name: db_container
