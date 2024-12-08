@@ -7,7 +7,7 @@ import setupSwagger from "./swagger/swagger";
 dotnev.config();
 const app = express();
 const port = process.env.PORT || 3000;
-console.log(process.env.DATABASE_PORT);
+
 app.use(express.json());
 setupSwagger(app);
 

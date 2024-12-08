@@ -130,17 +130,6 @@ describe("Task Routes Integration Tests", () => {
     });
 
     it("should not allow a basic user to delete another user's task", async () => {
-      // // Create a task for the admin user
-      // const adminUser = await prisma.user.create({
-      //   data: {
-      //     email: "administrator@example.com",
-      //     username: "adminuser",
-      //     firstName: "Admin",
-      //     lastName: "User",
-      //     password: "password123",
-      //     role: "admin",
-      //   },
-      // });
       const adminTask = await prisma.task.create({
         data: {
           body: "Admin's task",
@@ -159,17 +148,6 @@ describe("Task Routes Integration Tests", () => {
     });
 
     it("should allow admin to delete any task", async () => {
-      // const basicUser = await prisma.user.create({
-      //   data: {
-      //     email: "basicuser@example.com",
-      //     username: "basicuser",
-      //     firstName: "Basic",
-      //     lastName: "User",
-      //     password: "password123",
-      //     role: "basic",
-      //   },
-      // });
-
       const basicUserTask = await prisma.task.create({
         data: {
           body: "Basic user's task",
