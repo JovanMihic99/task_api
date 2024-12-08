@@ -7,7 +7,6 @@ services:
     volumes:
       - ./:/app 
       - /app/node_modules 
-    entrypoint: /app/entrypoint.sh 
     environment:
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
@@ -16,8 +15,11 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
       ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+      MODE: ${MODE:-start}
     depends_on:
       - postgresql_db
+    command: /bin/sh -c "if [ \"$MODE\" = 'dev' ]; then npm run dev; elif [ \"$MODE\" = 'test' ]; then npm run test; else npm run start; fi"
+  
   postgresql_db:
     image: postgres:16.4
     container_name: db_container

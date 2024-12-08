@@ -13,3 +13,5 @@ EXPOSE 3000
 
 ENV NAME task_api
 
+CMD ["npm", "run", "test"]
+
