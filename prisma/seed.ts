@@ -3,7 +3,9 @@ import { faker } from "@faker-js/faker";
 const prisma = new PrismaClient();
 
 async function main() {
-  const existingUsers = await prisma.user.findMany();
+  const existingUsers = await prisma.user.findMany({
+    take:6
+  });
   if (existingUsers.length > 5) {
     console.log("Users already exist, skipping seed.");
     return;
