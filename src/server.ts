@@ -1,9 +1,9 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 import dotnev from "dotenv"
 import taskRouter from "./routes/task-router";
 import userRouter from "./routes/user-router";
 import errorHandler from './middleware/error-handler'
-import setupSwagger from "../docs/swagger";
+import setupSwagger from "./swagger/swagger";
 dotnev.config();
 const app = express();
 const port = process.env.PORT || 3000;

@@ -11,12 +11,12 @@ const prisma = new PrismaClient();
 let token: string; // JWT token for a basic user
 let adminToken: string; // JWT token for an admin
 let taskId: number; // Store task ID for testing delete operations
-
+let admin: any, user: any;
 beforeAll(async () => {
   // Create a test user (basic) and an admin user
-  const user = await prisma.user.create({
+  user = await prisma.user.create({
     data: {
-      firstName: "Basic",
+      firstName: "Test",
       lastName: "User",
       username: "basicuser",
       email: `basic-${Date.now()}@example.com`,
@@ -25,10 +25,10 @@ beforeAll(async () => {
     },
   });
 
-  const admin = await prisma.user.create({
+  admin = await prisma.user.create({
     data: {
-      firstName: "Admin",
-      lastName: "User",
+      firstName: "Test",
+      lastName: "Admin",
       username: "adminuser",
       email: `admin-${Date.now()}@example.com`,
       password: "password123",
@@ -52,8 +52,17 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await prisma.task.deleteMany();
-  await prisma.user.deleteMany();
+  await prisma.task.deleteMany({
+    where: {
+      OR: [{ userId: admin.id }, { userId: user.id }],
+    },
+  });
+  await prisma.user.deleteMany({where: {
+    OR: [
+      { id: admin.id },
+      { id: user.id }
+    ]
+  }});
 });
 
 describe("Task Routes Integration Tests", () => {

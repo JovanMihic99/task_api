@@ -6,4 +6,4 @@ npm run migrate
 npx ts-node prisma/seed.ts
 
 # Start the development server
-npm run dev
+npm start
