@@ -55,7 +55,7 @@ const checkIsEmailTaken = async (
 ) => {
   const { email } = req.body;
   if (await UserService.isEmailTaken(email)) {
-    res.status(400).json({
+    res.status(409).json({
       error: "Email is already taken, please choose a different one.",
     });
     return;
@@ -69,7 +69,7 @@ const checkIsUsernameTaken= async (
 ) => {
   const { username } = req.body;
   if (await UserService.isUsernameTaken(username)) {
-    res.status(400).json({
+    res.status(409).json({
       error: "Username is already taken, please choose a different one.",
     });
     return;
