@@ -76,12 +76,12 @@ docker build -t task_api .
 
 ### 5. Run the Docker containers:
 #### Production Environment
-To start the api in `production` environment run:
+To start the API in `production` environment run:
 ```bash
 docker compose up 
 ```
 #### Development environment
-To start the api in `dev` environtment run:
+To start the API in `dev` environtment run:
 ```bash
 MODE=dev docker compose up 
 ```
