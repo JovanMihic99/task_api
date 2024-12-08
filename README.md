@@ -73,7 +73,7 @@ You can customize the values (such as `DATABASE_USER`, `DATABASE_PASSWORD`, etc.
 ### 5. Build the Docker image:
 
 ```bash
-docker build -t task_api .
+docker compose build
 ```
 
 ### 6. Run the Docker containers:
