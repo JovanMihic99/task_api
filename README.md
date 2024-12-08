@@ -50,9 +50,9 @@ git clone https://github.com/JovanMihic99/task_api.git
 cd task_api
 ```
 
-### 3. Create an `.env` file:
+### 3. Environment variables:
 
-In the root directory of the project, create a `.env` file to store your environment variables. The `.env` file should contain the following configuration:
+Ensure that you have a `.env` file in the project root directory. The `.env` file should contain the following configurations:
 
 ```env
 DATABASE_HOST=postgresql-db
@@ -66,7 +66,7 @@ DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}
 ACCESS_TOKEN_SECRET=YourSecret
 ```
 
-You can customize the values (such as `DATABASE_USER`, `DATABASE_PASSWORD`, etc.) if you have a different setup.
+You can customize the values (such as `DATABASE_USER`, `DATABASE_PASSWORD`, etc.) if you want a different setup.
 
 ### 4. Build the Docker image:
 
@@ -76,12 +76,12 @@ docker build -t task_api .
 
 ### 5. Run the Docker containers:
 #### Production Environment
-To start in `production` environment run:
+To start the api in `production` environment run:
 ```bash
 docker compose up 
 ```
 #### Development environment
-To start in `dev` environtment run:
+To start the api in `dev` environtment run:
 ```bash
 MODE=dev docker compose up 
 ```
