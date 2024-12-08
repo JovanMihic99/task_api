@@ -11,13 +11,12 @@ A dockerized REST API for managing tasks.
 
 ## Features
 
-- Create new tasks
-- Retrieve a list of tasks for authenticated users
-- Update existing tasks
-- Delete tasks
-- User authentication with JWT
+- CRUD operations for Tasks
+- Database Migrations and Seeding
+- JWT based User authentication
 - Admin authorization for managing users
 - Integration and Unit tests
+- Detailed API Documentation for all endpoints
 
 ## Technologies Used
 
@@ -95,6 +94,15 @@ MODE=test docker-compose run --rm task-api
 ## Usage
 
 The API will be running on `http://localhost:3000`
+
+When first starting the app, the database will be seeded with 100 randomly generated `basic users` (with their tasks respectively) and one `admin` user.
+To log into the `admin` account send a `POST` request to the login route (more details available at API docs) with the following request body: 
+```
+{
+"email": "admin@email.com",
+"password": "password" 
+}
+```
 
 ### API Documentation
 
